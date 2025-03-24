@@ -1,0 +1,51 @@
+
+@use "tailwindcss";
+.loading {
+  @apply text-center p-5 text-[#666];
+}
+
+.recipe {
+  @apply bg-white rounded-lg shadow-md overflow-hidden;
+  &__header {
+    @apply flex flex-col md:flex-row gap-8 p-5 bg-[#e3f2fd];
+    &__image {
+      @apply w-full h-[15.6rem] md:w-100 md:h-75 object-cover rounded-lg;
+    }
+  }
+  &__title-section {
+      @apply flex flex-col;
+    &__title {
+      @apply text-[2.25rem] text-[#333] m-0 mb-5;
+    }
+    &__extra-info {
+      @apply flex gap-7 text-[#666] mb-5;
+    }
+  }
+  &-content {
+    @apply p-5;
+    &__ingredients {
+      @apply mb-10;
+      &__title {
+        @apply text-[#333] mb-5;
+      }
+      &__list {
+        @apply list-none p-0 flex flex-wrap gap-2 justify-start;
+      }
+      &__chip {
+        @apply w-fit py-2 px-4 text-sm font-medium bg-[#f8f9fa] rounded-full border border-[#ccc];
+      }
+    }
+    
+    &__instructions {
+      &__title {
+        @apply text-[#333] mb-5;
+      }
+      &__steps {
+        @apply text-[#444] leading-6;
+      }
+  }
+    
+  }
+}
+
+  

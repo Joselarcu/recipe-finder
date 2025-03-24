@@ -1,0 +1,44 @@
+<div class="container">
+    <div *ngIf="loading" class="loading">
+    Loading recipe details...
+    </div>
+
+    <div *ngIf="error" class="alert alert-danger" role="alert">
+        {{ error }}
+    </div>
+
+
+    <div *ngIf="recipe" class="recipe">
+        <div class="recipe__header">
+            <img [src]="recipe.imageUrl" [alt]="recipe.title" class="recipe__header__image">
+            <div class="recipe__title-section">
+                <h1 class="recipe__title-section__title">{{ recipe.title }}</h1>
+                <div class="recipe__title-section__extra-info">
+                    <span><b>Ready in:</b> {{ recipe.readyInMinutes }} mins</span>
+                    <span><b>Difficulty:</b> {{ recipe.difficulty }}</span>
+                </div>
+                <button (click)="toggleFavorite()"  type="button" class="btn btn-success" [class.btn-success]="!recipe.favorite"
+                [class.btn-danger]="recipe.favorite"
+                >{{ recipe.favorite ? 'Remove from Favorites' : 'Add to Favorites' }}</button>
+            </div>
+        </div>
+
+        <div class="recipe-content">
+            
+            <div class="recipe-content__ingredients">
+                <h2 class="recipe-content__ingredients__title">Ingredients</h2>
+            <ul class="recipe-content__ingredients__list">
+                <li class="recipe-content__ingredients__chip" *ngFor="let ingredient of recipe.ingredients">
+                {{ ingredient.name | titlecase }} {{ ingredient.quantity | titlecase }} {{ ingredient.unit | titlecase}} 
+                </li>
+            </ul>
+            </div>
+
+            <div class="recipe-content__instructions">
+                <h2 class="recipe-content__instructions__title">Instructions</h2>
+                <div class="recipe-content__instructions__steps" [innerHTML]="recipe.instructions"></div>
+            </div>
+
+        </div>
+    </div>
+</div>

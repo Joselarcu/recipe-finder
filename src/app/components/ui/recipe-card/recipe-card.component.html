@@ -1,0 +1,16 @@
+<div class="card">
+  <img class="card-img-top" [src]="recipe.imageUrl" alt="{{recipe.title}}">
+  <div class="card-body">
+    <h5 class="card-title">{{recipe.title}}</h5>
+    <h6 class="card-subtitle mb-2 text-muted">Ready in: {{recipe.readyInMinutes}} mins</h6>
+    <!-- <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p> -->
+    <div class="d-flex gap-3">
+      <a [routerLink]="['/recipe', recipe.id]" class="btn btn-primary pr-2">View recipe</a>
+      @if(!recipe.favorite) {
+        <button (click)="toggleFromFavorites()" type="button" class="btn btn-success">+ favorite</button>
+      } @else {
+        <button (click)="toggleFromFavorites()" type="button" class="btn btn-danger">- favorite</button>
+      }
+    </div>
+  </div>
+</div>

@@ -1,0 +1,88 @@
+<div class="container mt-4">
+    <h1 class="text-center mb-4">Add New Recipe</h1>
+
+    <form [formGroup]="recipeForm" (ngSubmit)="addRecipe()" class="needs-validation">
+        <div class="card mb-4">
+
+            <div class="card-body">
+                <div class="mb-3">
+                    <label for="title" class="form-label">Recipe Title</label>
+                    <input type="text" class="form-control" id="title" formControlName="title" [class.is-invalid]="recipeForm.get('title')?.invalid && recipeForm.get('title')?.touched">
+                    <div class="invalid-feedback" *ngIf="recipeForm.get('title')?.invalid && recipeForm.get('title')?.touched">
+                        Title is required
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="readyInMinutes" class="form-label">Ready in (minutes)</label>
+                    <input type="number" class="form-control" id="readyInMinutes" formControlName="readyInMinutes" [class.is-invalid]="recipeForm.get('readyInMinutes')?.invalid && recipeForm.get('readyInMinutes')?.touched">
+                    <div class="invalid-feedback" *ngIf="recipeForm.get('readyInMinutes')?.invalid && recipeForm.get('readyInMinutes')?.touched">
+                        Please enter a valid number of minutes
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="readyInMinutes" class="form-label">Difficulty</label>
+                    <input type="text" class="form-control" id="difficulty" formControlName="difficulty" [class.is-invalid]="recipeForm.get('difficulty')?.invalid && recipeForm.get('difficulty')?.touched">
+                    <div class="invalid-feedback" *ngIf="recipeForm.get('difficulty')?.invalid && recipeForm.get('difficulty')?.touched">
+                        difficulty is requiredF
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="imageUrl" class="form-label">Image url</label>
+                    <input type="text" class="form-control" id="imageUrl" formControlName="imageUrl">
+                </div>
+
+                <div class="mb-3">
+                    <div class="form-check">
+                        <input type="checkbox" class="form-check-input" id="favorite" formControlName="favorite">
+                        <label class="form-check-label" for="favorite">Mark as favorite</label>
+                    </div>
+                </div>
+
+                <div class="mb-4">
+                    <h5 class="mb-2">Ingredients</h5>
+                    <div formArrayName="ingredients">
+                        <div *ngFor="let ingredient of ingredients.controls; let i=index" [formGroupName]="i" class="row mb-3">
+                            <div class="col-md-4">
+                                <input type="text" class="form-control" formControlName="name" placeholder="Ingredient name" [class.is-invalid]="ingredient.get('name')?.invalid && ingredient.get('name')?.touched">
+                                <div class="invalid-feedback" *ngIf="ingredient.get('name')?.invalid && ingredient.get('name')?.touched">
+                                    Name is required
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <input type="text" class="form-control" formControlName="quantity" placeholder="Quantity" [class.is-invalid]="ingredient.get('quantity')?.invalid && ingredient.get('quantity')?.touched">
+                                <div class="invalid-feedback" *ngIf="ingredient.get('quantity')?.invalid && ingredient.get('quantity')?.touched">
+                                    Quantity is required
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <input type="text" class="form-control" formControlName="unit" placeholder="Unit" >
+                            </div>
+                            <div class="col-md-2">
+                                <button type="button" class="btn btn-danger w-100" (click)="removeIngredient(i)">Remove</button>
+                            </div>
+                        </div>
+                         <button type="button" class="btn btn-sm btn-success" (click)="addIngredient()">Add Ingredient</button>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="instructions" class="form-label">Instructions</label>
+                    <textarea class="form-control" id="instructions" formControlName="instructions" rows="10" [class.is-invalid]="recipeForm.get('instructions')?.invalid && recipeForm.get('instructions')?.touched"></textarea>
+                    <div class="invalid-feedback" *ngIf="recipeForm.get('instructions')?.invalid && recipeForm.get('instructions')?.touched">
+                        Instructions are required
+                    </div>
+                    <div class="form-text">You can add html code to make the instructions more readable.</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="text-center">
+            <button type="submit" class="btn btn-primary btn-lg" [disabled]="!recipeForm.valid">Add Recipe</button>
+        </div>
+
+        <div *ngIf="errorMessage" class="alert alert-danger mt-3">
+            {{ errorMessage }}
+        </div>
+    </form>
+</div>

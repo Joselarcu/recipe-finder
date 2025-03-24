@@ -1,0 +1,35 @@
+<div class="container pt-4">
+  <h1 class="text-center pb-4">Search Recipes</h1>
+    <div class="d-flex gap-4 mb-4">
+      <div class="input-group">
+        <input
+          type="text"
+          [(ngModel)]="searchQuery"
+          (keyup.enter)="searchRecipes()"
+          placeholder="Search for recipes..."
+          class="form-control">
+        
+      </div>
+      <button type="button" class="btn btn-success" (click)="searchRecipes()">Search</button>
+    </div>
+    <div *ngIf="error" class="error-message">
+      {{ error }}
+    </div>
+
+    <div *ngIf="loading" class="loading">
+      Searching for recipes...
+    </div>
+
+    <div *ngIf="recipes.length > 0; else noRecipes" class="row">
+      @for (recipe of recipes; track recipe.id) {
+        <div class="col col-sm-12 col-md-6 col-lg-4 mb-4">
+          <app-recipe-card [recipe]="recipe"></app-recipe-card>
+        </div>
+      }
+    </div>
+    <ng-template #noRecipes>
+      <div class="alert alert-info">
+        No recipes found with this criteria.
+      </div>
+    </ng-template>
+</div>
