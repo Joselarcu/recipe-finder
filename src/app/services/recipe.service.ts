@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Firestore, collection, addDoc, getDocs, doc, getDoc, query, where, deleteDoc, updateDoc } from '@angular/fire/firestore';
-import { Observable, from, map, tap } from 'rxjs';
+import { Observable, debounceTime, from, map, switchMap, of } from 'rxjs';
 import { Recipe } from '../models/recipe.model';
 
 @Injectable({
@@ -39,8 +39,11 @@ export class RecipeService {
   }
 
   searchRecipes(searchTerms: string[]): Observable<Recipe[]> {
+    if (!searchTerms || searchTerms.length === 0) {
+      return of([]);
+    }
+
     const recipesRef = collection(this.firestore, this.COLLECTION_NAME);
-    
     const lowercaseTerms = searchTerms.map(term => term.toLowerCase());
     
     const queries = lowercaseTerms.map(term => 
@@ -61,7 +64,6 @@ export class RecipeService {
             }
           });
         });
-        
         return Array.from(uniqueRecipes.values());
       })
     );
