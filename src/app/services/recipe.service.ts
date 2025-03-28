@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Firestore, collection, addDoc, getDocs, doc, getDoc, query, where, deleteDoc, updateDoc } from '@angular/fire/firestore';
-import { Observable, debounceTime, from, map, switchMap, of } from 'rxjs';
+import { Firestore, collection, addDoc, getDocs, doc, docData, query, where, deleteDoc, updateDoc, collectionData, getDoc, } from '@angular/fire/firestore';
+import { Observable, from, map, of, tap } from 'rxjs';
 import { Recipe } from '../models/recipe.model';
 
 @Injectable({
@@ -11,16 +11,20 @@ export class RecipeService {
 
   constructor(private readonly firestore: Firestore) {}
 
+   getAllRecipes(): Observable<Recipe[]> {
+    const recipesRef = collection(this.firestore, this.COLLECTION_NAME);
+    return collectionData(recipesRef, { idField: 'id' }) as Observable<Recipe[]>;
+  }
+
   getFavoriteRecipes(): Observable<Recipe[]> {
     const recipesRef = collection(this.firestore, this.COLLECTION_NAME);
     const q = query(recipesRef, where('favorite', '==', true));
-    
-    return from(getDocs(q)).pipe(
-      map(snapshot => snapshot.docs.map(doc => ({
-        id: doc.id,
-        ...doc.data() as Omit<Recipe, 'id'>
-      })))
-    );
+    return collectionData(q, { idField: 'id' }) as Observable<Recipe[]>;
+  }
+
+   getRecipeById(id: string): Observable<Recipe | null> {
+    const docRef = doc(this.firestore, this.COLLECTION_NAME, id);
+    return docData(docRef, { idField: 'id' }) as Observable<Recipe | null>;
   }
 
   setFavorite(id: string, isFavorite: boolean): Observable<void> {
@@ -28,15 +32,7 @@ export class RecipeService {
     return from(updateDoc(docRef, { favorite: isFavorite }));
   }
 
-  getAllRecipes(): Observable<Recipe[]> {
-    const recipesRef = collection(this.firestore, this.COLLECTION_NAME);
-    return from(getDocs(recipesRef)).pipe(
-      map(snapshot => snapshot.docs.map(doc => ({
-        id: doc.id,
-        ...doc.data() as Omit<Recipe, 'id'>
-      })))
-    );
-  }
+ 
 
   searchRecipes(searchTerms: string[]): Observable<Recipe[]> {
     if (!searchTerms || searchTerms.length === 0) {
@@ -69,15 +65,7 @@ export class RecipeService {
     );
   }
 
-  getRecipeById(id: string): Observable<Recipe> {
-    const docRef = doc(this.firestore, this.COLLECTION_NAME, id);
-    return from(getDoc(docRef)).pipe(
-      map(doc => ({
-        id: doc.id,
-        ...doc.data() as Omit<Recipe, 'id'>
-      }))
-    );
-  }
+ 
 
   addRecipe(recipe: Omit<Recipe, 'id'>): Observable<string> {
    const keywords = [...recipe.title.split(' ').map(word => word.toLowerCase()), ...recipe.ingredients.map(ingredient => ingredient.name.toLowerCase())];

@@ -1,9 +1,9 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, computed, effect, Signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 import { RecipeService } from '../../services/recipe.service';
 import { Recipe } from '../../models/recipe.model';
-import { Subscription } from 'rxjs';
+import { toSignal } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-recipe-detail',
@@ -12,55 +12,42 @@ import { Subscription } from 'rxjs';
   templateUrl: './recipe-detail.component.html',
   styleUrls: ['./recipe-detail.component.scss']
 })
-export class RecipeDetailComponent implements OnInit, OnDestroy {
-  recipe: Recipe | null = null;
-  loading: boolean = true;
-  error: string = '';
-  subscription!: Subscription;
+export class RecipeDetailComponent{
+  private readonly recipeSignal: Signal<Recipe | null>;
+  
+  readonly recipe = computed(() => this.recipeSignal());
+  readonly loading = computed(() => this.recipe() === null);
+  readonly error = computed(() => 
+    this.recipe() === undefined ? 'Error loading recipe details. Please try again.' : ''
+  );
 
   constructor(
     private readonly route: ActivatedRoute,
     private readonly recipeService: RecipeService,
-  ) {}
+  ) {
+      const id = this.route.snapshot.paramMap.get('id') || '';
+      this.recipeSignal = toSignal(
+        this.recipeService.getRecipeById(id),
+        { initialValue: null }
+      );
 
-  ngOnInit(): void {
-    const recipeId = this.route.snapshot.paramMap.get('id') || '';
-    this.loadRecipe(recipeId);
+      effect(() => {
+        console.log('recipe:',this.recipe());
+        console.log('loading:',this.loading());
+        console.log('error:',this.error());
+      });
   }
-
-  ngOnDestroy(): void {
-    this.subscription.unsubscribe();
-  }
-
-  private loadRecipe(id: string): void {
-    this.loading = true;
-    this.error = '';
-    
-    this.subscription = this.recipeService.getRecipeById(id).subscribe({
-      next: (recipe: Recipe) => {
-        this.recipe = recipe;
-        this.loading = false;
-      },
-      error: (error) => {
-        this.error = 'Error loading recipe details. Please try again.';
-        this.loading = false;
-      }
-    });
-  }
+  
 
   toggleFavorite(): void {
-    if (!this.recipe) return;
-    else {
-      this.recipeService.setFavorite(this.recipe.id, !this.recipe.favorite).subscribe({
-        next: () => {
-          if(this.recipe) {
-            this.recipe.favorite = !this.recipe.favorite;
-          }
-        },
+    const currentRecipe = this.recipe();
+    if (!currentRecipe) return;
+
+    this.recipeService.setFavorite(currentRecipe.id, !currentRecipe.favorite)
+      .subscribe({
         error: (error) => {
-          this.error = 'Error toggling favorite. Please try again: ' + error;
+          console.error('Error toggling favorite:', error);
         }
       });
-    }
   }
 } 

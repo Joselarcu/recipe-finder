@@ -1,5 +1,4 @@
 
-// @use "tailwindcss";
 .loading {
   text-align: center;
   padding: 20px;
@@ -7,22 +6,18 @@
 }
 
 .recipe {
-  // @apply bg-white rounded-lg shadow-md overflow-hidden;
   background-color: white;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   overflow: hidden;
   
   &__header {
-    // @apply flex flex-col md:flex-row gap-8 p-5 bg-[#e3f2fd];
     display: flex;
     flex-direction: row;
     gap: 20px;
     padding: 20px;
     background-color: #e3f2fd;
     &__image {
-      // @apply w-full h-[15.6rem] md:w-100 md:h-75 object-cover rounded-lg;
-      // width: 100%;
       height: 15.6rem;
       width: 20rem;
       object-fit: cover;
@@ -30,18 +25,15 @@
     }
   }
   &__title-section {
-      // @apply flex flex-col;
       display: flex;
       flex-direction: column;
     &__title {
-      // @apply text-[2.25rem] text-[#333] m-0 mb-5;
       font-size: 2.25rem;
       color: #333;
       margin: 0;
       margin-bottom: 20px;
     }
     &__extra-info {
-      // @apply flex gap-7 text-[#666] mb-5;
       display: flex;
       gap: 20px;
       color: #666;
@@ -49,19 +41,15 @@
     }
   }
   &-content {
-    // @apply p-5;
     padding: 20px;
     &__ingredients {
-      // @apply mb-10;
       margin-bottom: 20px;
       &__title {
-        // @apply text-[#333] mb-5;
         font-size: 1.5rem;
         color: #333;
         margin-bottom: 20px;
       }
       &__list {
-        // @apply list-none p-0 flex flex-wrap gap-2 justify-start;
         list-style: none;
         padding: 0;
         display: flex;
@@ -70,7 +58,6 @@
         gap: 15px;
       }
       &__chip {
-        // @apply w-fit py-2 px-4 text-sm font-medium bg-[#f8f  9fa] rounded-full border border-[#ccc];
         width: fit-content;
         padding: 5px 10px;
         font-size: 0.875rem;
@@ -82,14 +69,12 @@
     }
     
     &__instructions {
-      &__title {
-        // @apply text-[#333] mb-5;  
+      &__title { 
         font-size: 1.5rem;
         color: #333;
         margin-bottom: 20px;
       }
       &__steps {
-        // @apply text-[#444] leading-6;
         font-size: 1rem;
         color: #444;
         line-height: 1.5;
