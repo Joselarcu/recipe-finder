@@ -43,3 +43,6 @@ Thumbs.db
 # Environment variables
 /src/environments/*
 
+# Cypress
+/cypress/screenshots
+
