@@ -1,16 +1,26 @@
 <div class="container">
     <h1 class="text-center pb-4">My Favorite Recipes</h1>
 
-    <div *ngIf="recipes.length === 0" class="no-favorites">
-        <p>You haven't saved any favorite recipes yet.</p>
-        <button routerLink="/" type="button" class="btn btn-success">Search Recipes</button>
-    </div>
+    @if(recipes() !== null && recipes()?.length === 0) {
+        <div class="no-favorites">
+            <p>You haven't saved any favorite recipes yet.</p>
+            <button routerLink="/" type="button" class="btn btn-success">Search Recipes</button>
+        </div>
+    }
+    
+    @if(loading()) {
+        <div class="loading">
+            Loading recipe details...
+        </div>
+    }
 
-    <div *ngIf="recipes.length > 0" class="row">
-        @for (recipe of recipes; track recipe.id) {
-            <div class="col col-sm-1 col-md-2 col-lg-4 col-xl-4 mb-4">
-                <app-recipe-card [recipe]="recipe" (reloadRecipes)="loadFavoriteRecipes()"></app-recipe-card>
-            </div>
-        }
-    </div>
+    @if((recipes() ?? []).length > 0) {
+        <div class="row">
+            @for (recipe of recipes(); track recipe.id) {
+                <div class="col col-sm-1 col-md-2 col-lg-4 col-xl-4 mb-4">
+                    <app-recipe-card [recipe]="recipe" (reloadRecipes)="loadFavoriteRecipes()"></app-recipe-card>
+                </div>
+            }
+        </div>
+    }
 </div>
