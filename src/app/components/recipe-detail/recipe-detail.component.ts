@@ -1,9 +1,10 @@
-import { Component, computed, effect, Signal } from '@angular/core';
+import { Component, computed, OnDestroy, Signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 import { RecipeService } from '../../services/recipe.service';
 import { Recipe } from '../../models/recipe.model';
 import { toSignal } from '@angular/core/rxjs-interop';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-recipe-detail',
@@ -12,7 +13,7 @@ import { toSignal } from '@angular/core/rxjs-interop';
   templateUrl: './recipe-detail.component.html',
   styleUrls: ['./recipe-detail.component.scss']
 })
-export class RecipeDetailComponent{
+export class RecipeDetailComponent implements OnDestroy{
   private readonly recipeSignal: Signal<Recipe | null>;
   
   readonly recipe = computed(() => this.recipeSignal());
@@ -20,6 +21,7 @@ export class RecipeDetailComponent{
   readonly error = computed(() => 
     this.recipe() === undefined ? 'Error loading recipe details. Please try again.' : ''
   );
+  private readonly subscription = new Subscription();
 
   constructor(
     private readonly route: ActivatedRoute,
@@ -30,24 +32,23 @@ export class RecipeDetailComponent{
         this.recipeService.getRecipeById(id),
         { initialValue: null }
       );
+  }
 
-      effect(() => {
-        console.log('recipe:',this.recipe());
-        console.log('loading:',this.loading());
-        console.log('error:',this.error());
-      });
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
   
 
   toggleFavorite(): void {
     const currentRecipe = this.recipe();
+    console.log('currentRecipe', currentRecipe);
     if (!currentRecipe) return;
 
-    this.recipeService.setFavorite(currentRecipe.id, !currentRecipe.favorite)
+    this.subscription.add(this.recipeService.setFavorite(currentRecipe.id, !currentRecipe.favorite)
       .subscribe({
-        error: (error) => {
+        error: (error: any) => {
           console.error('Error toggling favorite:', error);
         }
-      });
+      }));
   }
 } 

@@ -1,9 +1,14 @@
 <div class="container mt-4">
     <h1 class="text-center mb-4">Add New Recipe</h1>
+    <div *ngIf="error()" class="alert alert-danger mt-3">
+        {{ error() }}
+    </div>
 
+    <div *ngIf="success()" class="alert alert-success mt-3">
+        Recipe added successfully! Redirecting...
+    </div>
     <form [formGroup]="recipeForm" (ngSubmit)="addRecipe()" class="needs-validation">
         <div class="card mb-4">
-
             <div class="card-body">
                 <div class="mb-3">
                     <label for="title" class="form-label">Recipe Title</label>
@@ -21,15 +26,20 @@
                 </div>
 
                 <div class="mb-3">
-                    <label for="readyInMinutes" class="form-label">Difficulty</label>
-                    <input type="text" class="form-control" id="difficulty" formControlName="difficulty" [class.is-invalid]="recipeForm.get('difficulty')?.invalid && recipeForm.get('difficulty')?.touched">
+                    <label for="difficulty" class="form-label">Difficulty</label>
+                    <select class="form-select" id="difficulty" formControlName="difficulty" [class.is-invalid]="recipeForm.get('difficulty')?.invalid && recipeForm.get('difficulty')?.touched">
+                        <option value="">Select difficulty</option>
+                        <option value="easy">Easy</option>
+                        <option value="medium">Medium</option>
+                        <option value="hard">Hard</option>
+                    </select>
                     <div class="invalid-feedback" *ngIf="recipeForm.get('difficulty')?.invalid && recipeForm.get('difficulty')?.touched">
-                        difficulty is requiredF
+                        Difficulty is required
                     </div>
                 </div>
 
                 <div class="mb-3">
-                    <label for="imageUrl" class="form-label">Image url</label>
+                    <label for="imageUrl" class="form-label">Image URL</label>
                     <input type="text" class="form-control" id="imageUrl" formControlName="imageUrl">
                 </div>
 
@@ -57,13 +67,13 @@
                                 </div>
                             </div>
                             <div class="col-md-3">
-                                <input type="text" class="form-control" formControlName="unit" placeholder="Unit" >
+                                <input type="text" class="form-control" formControlName="unit" placeholder="Unit">
                             </div>
                             <div class="col-md-2">
                                 <button type="button" class="btn btn-danger w-100" (click)="removeIngredient(i)">Remove</button>
                             </div>
                         </div>
-                         <button type="button" class="btn btn-sm btn-success" (click)="addIngredient()">Add Ingredient</button>
+                        <button type="button" class="btn btn-sm btn-success" (click)="addIngredient()">Add Ingredient</button>
                     </div>
                 </div>
                 <div class="mb-3">
@@ -78,11 +88,13 @@
         </div>
 
         <div class="text-center">
-            <button type="submit" class="btn btn-primary btn-lg" [disabled]="!recipeForm.valid">Add Recipe</button>
-        </div>
-
-        <div *ngIf="errorMessage" class="alert alert-danger mt-3">
-            {{ errorMessage }}
+            <button type="submit" class="btn btn-primary btn-lg" [disabled]="!recipeForm.valid || loading()">
+                <span *ngIf="!loading()">Add Recipe</span>
+                <span *ngIf="loading()">
+                    <span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+                    Adding Recipe...
+                </span>
+            </button>
         </div>
     </form>
 </div>

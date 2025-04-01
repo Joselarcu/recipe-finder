@@ -1,10 +1,10 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, computed, effect, signal, Injector } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, FormArray, Validators, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { RecipeService } from '../../services/recipe.service';
 import { Recipe } from '../../models/recipe.model';
-import { Subscription } from 'rxjs';
+import { toSignal } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-add-recipe',
@@ -13,33 +13,40 @@ import { Subscription } from 'rxjs';
   templateUrl: './add-recipe.component.html',
   styleUrl: './add-recipe.component.scss'
 })
-export class AddRecipeComponent implements OnInit, OnDestroy {
+export class AddRecipeComponent {
   recipeForm: FormGroup;
-  errorMessage: string = '';
-  subscription: Subscription = new Subscription();
+  private readonly errorSignal = signal<string>('');
+  readonly error = computed(() => this.errorSignal());
+  private readonly loadingSignal = signal<boolean>(false);
+  readonly loading = computed(() => this.loadingSignal());
+  private readonly successSignal = signal<boolean>(false);
+  readonly success = computed(() => this.successSignal());
+  private readonly injector: Injector;
 
   constructor(
     private readonly fb: FormBuilder,
     private readonly recipeService: RecipeService,
-    private readonly router: Router
+    private readonly router: Router,
+    injector: Injector
   ) {
+    this.injector = injector;
     this.recipeForm = this.fb.group({
       title: ['', Validators.required],
       readyInMinutes: [0, [Validators.required, Validators.min(0)]],
       ingredients: this.fb.array([]),
       instructions: ['', Validators.required],
-      difficulty: [''],
+      difficulty: ['', Validators.required],
       imageUrl: [''],
       favorite: [false]
     });
-  }
 
-  ngOnInit(): void {
     this.addIngredient();
-  }
 
-  ngOnDestroy(): void {
-    this.subscription.unsubscribe();
+    effect(() => {
+      if (this.recipeForm.valid) {
+        this.errorSignal.set('');
+      }
+    });
   }
 
   get ingredients() {
@@ -63,24 +70,30 @@ export class AddRecipeComponent implements OnInit, OnDestroy {
 
   addRecipe(): void {
     if (this.recipeForm.valid) {
+      this.loadingSignal.set(true);
+      this.errorSignal.set('');
+      this.successSignal.set(false);
+
       const recipeData: Omit<Recipe, 'id'> = {
         ...this.recipeForm.value
       };
+      const recipeIdSignal = toSignal(
+        this.recipeService.addRecipe(recipeData),
+        { initialValue: null, injector: this.injector }
+      );
 
-     this.subscription = this.recipeService.addRecipe(recipeData).subscribe({
-        next: (recipeId) => {
-          if (recipeId) {
+      effect(() => {
+        const recipeId = recipeIdSignal();
+        if (recipeId) {
+          this.successSignal.set(true);
+          this.loadingSignal.set(false);
+          setTimeout(() => {
             this.router.navigate(['/recipes']);
-          } else {
-            this.errorMessage = 'There was an error adding the recipe. Please try again.';
-          }
-        },
-        error: (error) => {
-          this.errorMessage = 'Error adding recipe: ' + error;
+          }, 1500);
         }
-      });
+      }, {injector: this.injector});
     } else {
-      this.errorMessage = 'Please fill in all required fields.';
+      this.errorSignal.set('Please fill in all required fields.');
       Object.keys(this.recipeForm.controls).forEach(key => {
         const control = this.recipeForm.get(key);
         if (control?.invalid) {
