@@ -41,7 +41,6 @@ export class RecipeDetailComponent implements OnDestroy{
 
   toggleFavorite(): void {
     const currentRecipe = this.recipe();
-    console.log('currentRecipe', currentRecipe);
     if (!currentRecipe) return;
 
     this.subscription.add(this.recipeService.setFavorite(currentRecipe.id, !currentRecipe.favorite)

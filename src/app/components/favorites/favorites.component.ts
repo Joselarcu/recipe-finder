@@ -19,7 +19,7 @@ export class FavoritesComponent  {
   loading = computed(() => this.recipes() === null);
   
   constructor(private readonly recipeService: RecipeService, private readonly injector: Injector) {
-    this.loadFavoriteRecipes();
+      this.loadFavoriteRecipes();
   }
 
 

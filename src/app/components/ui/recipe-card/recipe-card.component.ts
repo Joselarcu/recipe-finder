@@ -18,12 +18,10 @@ export class RecipeCardComponent {
 
   constructor(private readonly recipeService: RecipeService) {}
 
-
    toggleFromFavorites(): void {
     console.log('recipe', this.recipe.id);
       this.recipeService.setFavorite(this.recipe.id, !this.recipe.favorite).subscribe({
         next: () => {
-          // this.loadFavorites();
           this.reloadRecipes.emit();
           this.recipe.favorite = !this.recipe.favorite;
         },
