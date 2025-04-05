@@ -8,7 +8,7 @@ import { provideRouter } from '@angular/router';
 describe('FavoritesComponent', () => {
   let component: FavoritesComponent;
   let fixture: ComponentFixture<FavoritesComponent>;
-  let mockRecipes: Recipe[]  = [
+  const mockRecipes: Recipe[]  = [
     {
       id: '1',
       title: 'Test Recipe 1',

@@ -45,7 +45,7 @@ export class RecipeDetailComponent implements OnDestroy{
 
     this.subscription.add(this.recipeService.setFavorite(currentRecipe.id, !currentRecipe.favorite)
       .subscribe({
-        error: (error: any) => {
+        error: (error: Error) => {
           console.error('Error toggling favorite:', error);
         }
       }));
