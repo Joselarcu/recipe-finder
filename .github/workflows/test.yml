@@ -48,5 +48,5 @@ jobs:
             -Dsonar.organization=joselarcu
             -Dsonar.projectKey=Joselarcu_recipe-finder
             -Dsonar.javascript.lcov.reportPaths=coverage/lcov.info
-          env:
-            SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
