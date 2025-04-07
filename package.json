@@ -12,7 +12,7 @@
     "test:coverage": "jest --coverage",
     "cypress:open": "cypress open",
     "cypress:run": "cypress run",
-    "e2e": "start-server-and-test start:ci http://localhost:4200 cypress:run",
+    "e2e": "npx cypress run || exit 1",
     "start:ci": "ng serve --configuration ci",
     "serve:ssr:recipe-finder": "node dist/recipe-finder/server/server.mjs",
     "pre-commit": "lint-staged",
