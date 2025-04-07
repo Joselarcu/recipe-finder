@@ -11,14 +11,14 @@
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage",
     "cypress:open": "cypress open",
-    
     "cy:run": "start-server-and-test start http://localhost:4200 'cypress run'",
     "e2e": "npx cypress run || exit 1",
     "start:ci": "ng serve --configuration ci",
     "serve:ssr:recipe-finder": "node dist/recipe-finder/server/server.mjs",
     "pre-commit": "lint-staged",
     "prepare": "husky",
-    "lint": "ng lint"
+    "lint": "ng lint",
+    "sonar": "npm run test:coverage && sonar-scanner"
   },
   "private": true,
   "dependencies": {
@@ -51,12 +51,14 @@
     "angular-eslint": "19.3.0",
     "cypress": "^14.2.1",
     "eslint": "^9.23.0",
+    "fs": "^0.0.1-security",
     "globals": "^16.0.0",
     "husky": "^9.1.7",
     "jest": "^29.7.0",
     "jest-preset-angular": "^14.0.0",
     "lint-staged": "^15.5.0",
     "prettier": "^3.5.3",
+    "sonar-scanner": "^3.1.0",
     "start-server-and-test": "^2.0.11",
     "ts-jest": "^29.1.2",
     "ts-node": "^10.9.2",
