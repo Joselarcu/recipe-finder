@@ -25,4 +25,4 @@ jobs:
         run: npm run test -- --watch=false --browsers=ChromeHeadless
 
       - name: Run e2e tests
-        run: npm run e2e
+        run: cy:run
