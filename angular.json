@@ -72,6 +72,10 @@
             },
             "development": {
               "buildTarget": "recipe-finder:build:development"
+            },
+            "ci": {
+              "buildTarget": "recipe-finder:build:development",
+              "port": 4201
             }
           },
           "defaultConfiguration": "development"
@@ -99,11 +103,23 @@
             ],
             "scripts": []
           }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "src/**/*.ts",
+              "src/**/*.html"
+            ]
+          }
         }
       }
     }
   },
   "cli": {
-    "analytics": false
+    "analytics": false,
+    "schematicCollections": [
+      "angular-eslint"
+    ]
   }
 }

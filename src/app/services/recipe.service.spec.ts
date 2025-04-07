@@ -1,8 +1,7 @@
 import { TestBed } from '@angular/core/testing';
 import { RecipeService } from './recipe.service';
-import { Firestore, collection, collectionData, doc, docData, query, where, addDoc, updateDoc, deleteDoc, getDocs } from '@angular/fire/firestore';
-import { of } from 'rxjs';
-import { Recipe } from '../models/recipe.model';
+import { Firestore } from '@angular/fire/firestore';
+// import { Recipe } from '../models/recipe.model';
 
 describe('RecipeService', () => {
   let service: RecipeService;
@@ -17,30 +16,30 @@ describe('RecipeService', () => {
   let mockDeleteDoc: jest.Mock;
   let mockGetDocs: jest.Mock;
 
-  const mockRecipes: Recipe[] = [
-    {
-      id: '1',
-      title: 'Test Recipe 1',
-      readyInMinutes: 30,
-      instructions: 'Test instructions 1',
-      favorite: true,
-      ingredients: [{ name: 'Ingredient 1', quantity: '1', unit: 'unit' }],
-      difficulty: 'easy',
-      imageUrl: 'test1.jpg',
-      keywords: ['test', 'recipe', '1', 'ingredient']
-    },
-    {
-      id: '2',
-      title: 'Test Recipe 2',
-      readyInMinutes: 45,
-      instructions: 'Test instructions 2',
-      favorite: false,
-      ingredients: [{ name: 'Ingredient 2', quantity: '2', unit: 'unit' }],
-      difficulty: 'medium',
-      imageUrl: 'test2.jpg',
-      keywords: ['test', 'recipe', '2', 'ingredient']
-    }
-  ];
+  // const mockRecipes: Recipe[] = [
+  //   {
+  //     id: '1',
+  //     title: 'Test Recipe 1',
+  //     readyInMinutes: 30,
+  //     instructions: 'Test instructions 1',
+  //     favorite: true,
+  //     ingredients: [{ name: 'Ingredient 1', quantity: '1', unit: 'unit' }],
+  //     difficulty: 'easy',
+  //     imageUrl: 'test1.jpg',
+  //     keywords: ['test', 'recipe', '1', 'ingredient']
+  //   },
+  //   {
+  //     id: '2',
+  //     title: 'Test Recipe 2',
+  //     readyInMinutes: 45,
+  //     instructions: 'Test instructions 2',
+  //     favorite: false,
+  //     ingredients: [{ name: 'Ingredient 2', quantity: '2', unit: 'unit' }],
+  //     difficulty: 'medium',
+  //     imageUrl: 'test2.jpg',
+  //     keywords: ['test', 'recipe', '2', 'ingredient']
+  //   }
+  // ];
 
   beforeEach(() => {
     mockCollection = jest.fn();

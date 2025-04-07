@@ -15,10 +15,10 @@ import { Subject, Subscription, debounceTime, distinctUntilChanged, switchMap } 
   styleUrls: ['./recipe-search.component.scss']
 })
 export class RecipeSearchComponent implements OnInit, OnDestroy {
-  searchQuery: string = '';
+  searchQuery = '';
   recipes: Recipe[] = [];
-  loading: boolean = false;
-  error: string = '';
+  loading = false;
+  error = '';
   private readonly searchSubject = new Subject<string>();
   private readonly subscription: Subscription = new Subscription();
 
