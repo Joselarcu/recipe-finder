@@ -11,7 +11,8 @@
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage",
     "cypress:open": "cypress open",
-    "cypress:run": "cypress run",
+    
+    "cy:run": "start-server-and-test start http://localhost:4200 'cypress run'",
     "e2e": "npx cypress run || exit 1",
     "start:ci": "ng serve --configuration ci",
     "serve:ssr:recipe-finder": "node dist/recipe-finder/server/server.mjs",
