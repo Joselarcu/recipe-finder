@@ -1,6 +1,7 @@
 {
   "name": "recipe-finder",
   "version": "0.0.0",
+  "type": "module",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -10,12 +11,14 @@
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage",
     "cypress:open": "cypress open",
-    "cypress:run": "cypress run",
-    "e2e": "start-server-and-test start:ci http://localhost:4200 cypress:run",
+    
+    "cy:run": "start-server-and-test start http://localhost:4200 'cypress run'",
+    "e2e": "npx cypress run || exit 1",
     "start:ci": "ng serve --configuration ci",
     "serve:ssr:recipe-finder": "node dist/recipe-finder/server/server.mjs",
     "pre-commit": "lint-staged",
-    "prepare": "husky"
+    "prepare": "husky",
+    "lint": "ng lint"
   },
   "private": true,
   "dependencies": {
@@ -45,14 +48,28 @@
     "@types/express": "^4.17.17",
     "@types/jest": "^29.5.12",
     "@types/node": "^18.18.0",
+    "angular-eslint": "19.3.0",
     "cypress": "^14.2.1",
+    "eslint": "^9.23.0",
+    "globals": "^16.0.0",
     "husky": "^9.1.7",
     "jest": "^29.7.0",
     "jest-preset-angular": "^14.0.0",
     "lint-staged": "^15.5.0",
+    "prettier": "^3.5.3",
     "start-server-and-test": "^2.0.11",
     "ts-jest": "^29.1.2",
     "ts-node": "^10.9.2",
-    "typescript": "~5.7.2"
+    "typescript": "~5.7.2",
+    "typescript-eslint": "8.27.0"
+  },
+  "lint-staged": {
+    "*.{ts,html,js,json}": [
+      "prettier --write",
+      "eslint --fix"
+    ],
+    "*.scss": [
+      "prettier --write"
+    ]
   }
 }

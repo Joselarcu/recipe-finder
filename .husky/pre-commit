@@ -1,1 +1,15 @@
-npm test
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
+
+echo "🧹 Executing ESLint in the project..."
+# npx eslint . --ext .ts,.js,.html --max-warnings=0
+ng lint
+# npx lint-staged
+if [ $? -ne 0 ]; then
+  echo "❌ Linting failed. Fix the errors before committing."
+  exit 1
+fi
+
+echo "✅ Linting correct. Proceeding with the commit."
+
+# npx lint-staged

@@ -1,0 +1,11 @@
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
+
+branch_name="$(git symbolic-ref --short HEAD)"
+
+if [ "$branch_name" = "master" ] || [ "$branch_name" = "main" ]; then
+  echo "🚫 Not allow direct push to '$branch_name' branch"
+  exit 1
+fi
+
+exit 0

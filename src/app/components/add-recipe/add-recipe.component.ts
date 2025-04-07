@@ -31,16 +31,16 @@ export class AddRecipeComponent {
   ) {
     this.injector = injector;
     this.recipeForm = this.fb.group({
-      title: ['', Validators.required],
+        title: ['', Validators.required],
       readyInMinutes: [0, [Validators.required, Validators.min(0)]],
-      ingredients: this.fb.array([]),
+         ingredients: this.fb.array([]),
       instructions: ['', Validators.required],
       difficulty: ['', Validators.required],
       imageUrl: [''],
-      favorite: [false]
+         favorite: [false]
     });
 
-    this.addIngredient();
+      this.addIngredient();
 
     effect(() => {
       if (this.recipeForm.valid) {
