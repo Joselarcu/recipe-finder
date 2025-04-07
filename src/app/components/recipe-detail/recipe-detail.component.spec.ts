@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { RecipeDetailComponent } from './recipe-detail.component';
 import { RecipeService } from '../../services/recipe.service';
 import { ActivatedRoute } from '@angular/router';
-import { of } from 'rxjs';
+import { of, throwError } from 'rxjs';
 import { Recipe } from '../../models/recipe.model';
 
 describe('RecipeDetailComponent', () => {

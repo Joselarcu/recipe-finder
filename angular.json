@@ -72,6 +72,10 @@
             },
             "development": {
               "buildTarget": "recipe-finder:build:development"
+            },
+            "ci": {
+              "buildTarget": "recipe-finder:build:development",
+              "port": 4201
             }
           },
           "defaultConfiguration": "development"
