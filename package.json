@@ -7,7 +7,7 @@
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "jest  --browsers=ChromeHeadless --codeCoverage=true",
+    "test:ci": "jest  --browsers=ChromeHeadless --codeCoverage --watch=false",
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage",
     "cypress:open": "cypress open",
