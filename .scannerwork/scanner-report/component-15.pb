@@ -1,1 +1,1 @@
- 2tsXhrsrc/app/models/recipe.model.ts
+ 2tsXhrsrc/app/models/recipe.model.ts

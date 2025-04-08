@@ -1,1 +1,1 @@
- 2tsX$hr:src/app/components/ui/recipe-card/recipe-card.component.ts
+ 2tsX$hr:src/app/components/ui/recipe-card/recipe-card.component.ts

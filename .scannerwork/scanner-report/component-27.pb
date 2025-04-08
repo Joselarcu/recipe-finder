@@ -1,1 +1,1 @@
- (2tsXhr7src/app/components/ui/nav-bar/nav-bar.component.spec.ts
+ (2tsXhr7src/app/components/ui/nav-bar/nav-bar.component.spec.ts
