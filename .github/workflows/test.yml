@@ -28,9 +28,6 @@ jobs:
       - name: Run unit tests
         run: npm run test 
 
-      - name: Check coverage file
-        run: ls -lh coverage/
-
       - name: Run e2e tests
         run: npm run cy:run
         env:
@@ -41,6 +38,9 @@ jobs:
           FIREBASE_MESSAGING_SENDER_ID: ${{ secrets.FIREBASE_MESSAGING_SENDER_ID }}
           FIREBASE_APP_ID: ${{ secrets.FIREBASE_APP_ID }}
       
+      - name: Check coverage file
+        run: ls -lh coverage/
+  
       - name: SonarCloud Scan
         uses: SonarSource/sonarqube-scan-action@v5
         env:
