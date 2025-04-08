@@ -1,1 +1,1 @@
- 2tsX"hr3src/app/components/favorites/favorites.component.ts
+ 2tsX"hr3src/app/components/favorites/favorites.component.ts

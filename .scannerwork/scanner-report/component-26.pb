@@ -1,1 +1,1 @@
- (2tsXhr5src/app/components/ui/footer/footer.component.spec.ts
+ (2tsXhr5src/app/components/ui/footer/footer.component.spec.ts

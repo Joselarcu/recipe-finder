@@ -1,1 +1,1 @@
- (2tsX>hr8src/app/components/favorites/favorites.component.spec.ts
+ (2tsX>hr8src/app/components/favorites/favorites.component.spec.ts

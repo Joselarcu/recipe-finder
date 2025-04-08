@@ -34,6 +34,12 @@ jobs:
           path: ~/.sonar/cache
           key: ${{ runner.os }}-sonar
 
+      - name: Verificar cobertura generada
+        run: |
+          ls -l coverage
+          head -n 10 coverage/lcov.info
+        
+          
       - name: Run SonarQube scanner
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}

@@ -1,1 +1,1 @@
- 2tsXhr"src/app/models/ingredient.model.ts
+ 2tsXhr"src/app/models/ingredient.model.ts
