@@ -29,7 +29,7 @@ jobs:
         run: npm run test 
 
       - name: Check coverage file
-        run: ls -l coverage && cat coverage/lcov.info | head -n 10
+        run: ls -lh coverage/
 
       - name: Run e2e tests
         run: npm run cy:run
@@ -42,11 +42,6 @@ jobs:
           FIREBASE_APP_ID: ${{ secrets.FIREBASE_APP_ID }}
       
       - name: SonarCloud Scan
-        uses: SonarSource/sonarcloud-github-action@v2
-        with:
-          args: >
-            -Dsonar.organization=joselarcu
-            -Dsonar.projectKey=Joselarcu_recipe-finder
-            -Dsonar.javascript.lcov.reportPaths=coverage/lcov.info
+        uses: SonarSource/sonarqube-scan-action@v5
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
