@@ -1,0 +1,1 @@
+ 2tsXhr0src/app/components/ui/footer/footer.component.ts
