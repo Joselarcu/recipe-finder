@@ -1,0 +1,1 @@
+	 2tsX5hr;src/app/components/recipe-detail/recipe-detail.component.ts

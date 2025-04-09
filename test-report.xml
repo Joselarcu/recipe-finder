@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testExecutions version="1">
+  <file path="C:\Users\jose\workspace\my-projects\recipe-finder\src\app\components\ui\footer\footer.component.spec.ts">
+    <testCase name="FooterComponent should create" duration="277"/>
+  </file>
+  <file path="C:\Users\jose\workspace\my-projects\recipe-finder\src\app\services\recipe.service.spec.ts">
+    <testCase name="RecipeService should be created" duration="90"/>
+  </file>
+  <file path="C:\Users\jose\workspace\my-projects\recipe-finder\src\app\app.component.spec.ts">
+    <testCase name="AppComponent should create the app" duration="389"/>
+  </file>
+  <file path="C:\Users\jose\workspace\my-projects\recipe-finder\src\app\components\ui\nav-bar\nav-bar.component.spec.ts">
+    <testCase name="NavBarComponent should create" duration="332"/>
+  </file>
+  <file path="C:\Users\jose\workspace\my-projects\recipe-finder\src\app\components\favorites\favorites.component.spec.ts">
+    <testCase name="FavoritesComponent should create" duration="247"/>
+    <testCase name="FavoritesComponent should load favorite recipes successfully" duration="12"/>
+  </file>
+  <file path="C:\Users\jose\workspace\my-projects\recipe-finder\src\app\components\ui\recipe-card\recipe-card.component.spec.ts">
+    <testCase name="RecipeCardComponent should create" duration="235"/>
+  </file>
+  <file path="C:\Users\jose\workspace\my-projects\recipe-finder\src\app\components\recipe-detail\recipe-detail.component.spec.ts">
+    <testCase name="RecipeDetailComponent should create" duration="235"/>
+    <testCase name="RecipeDetailComponent should initialize with loading state" duration="64"/>
+    <testCase name="RecipeDetailComponent should load recipe successfully" duration="43"/>
+    <testCase name="RecipeDetailComponent should toggle favorite successfully" duration="31"/>
+    <testCase name="RecipeDetailComponent should not toggle favorite if recipe is null" duration="29"/>
+    <testCase name="RecipeDetailComponent should handle error when toggling favorite" duration="24"/>
+  </file>
+  <file path="C:\Users\jose\workspace\my-projects\recipe-finder\src\app\components\recipe-search\recipe-search.component.spec.ts">
+    <testCase name="RecipeSearchComponent should create" duration="227"/>
+  </file>
+  <file path="C:\Users\jose\workspace\my-projects\recipe-finder\src\app\components\add-recipe\add-recipe.component.spec.ts">
+    <testCase name="AddRecipeComponent should create" duration="293"/>
+    <testCase name="AddRecipeComponent should initialize form with empty values" duration="40"/>
+    <testCase name="AddRecipeComponent should get ingredients" duration="46"/>
+    <testCase name="AddRecipeComponent should add ingredient" duration="29"/>
+    <testCase name="AddRecipeComponent should remove ingredient" duration="30"/>
+    <testCase name="AddRecipeComponent should not add recipe if form is invalid" duration="26"/>
+    <testCase name="AddRecipeComponent should add recipe" duration="41"/>
+  </file>
+</testExecutions>
