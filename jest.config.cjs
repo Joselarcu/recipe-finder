@@ -11,4 +11,5 @@ module.exports = {
     '!src/environments/**'
   ],
   coverageReporters: ['html', 'text', 'lcov', 'text-summary'],
+  coveragePathIgnorePatterns: ['src/main.ts', 'src/environments/**', 'app.routes.server.ts', 'appendFile.config.ts', 'server.ts']
 };
