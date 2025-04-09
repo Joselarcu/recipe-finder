@@ -27,7 +27,7 @@ export class RecipeDetailComponent implements OnDestroy{
     private readonly route: ActivatedRoute,
     private readonly recipeService: RecipeService,
   ) {
-      const id = this.route.snapshot.paramMap.get('id') || '';
+      const id = this.route.snapshot.paramMap.get('id') ?? '';
       this.recipeSignal = toSignal(
         this.recipeService.getRecipeById(id),
         { initialValue: null }
