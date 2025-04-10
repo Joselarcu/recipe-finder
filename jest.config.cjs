@@ -10,6 +10,14 @@ module.exports = {
     '!src/main.ts',
     '!src/environments/**'
   ],
+  coverageThreshold: {
+    global: {
+      branches: 95,
+      functions: 95,
+      lines: 95,
+      statements: 95
+    }
+  },
   coverageReporters: ['html', 'text', 'lcov', 'text-summary'],
   coveragePathIgnorePatterns: ['/node_modules/', 'src/main.ts', 'src/environments/', 'src/app/app.routes.server.ts', 'src/app/app.config.ts', 'src/server.ts', 'src/app/app.routes.ts', 'src/main.ts']
 };
