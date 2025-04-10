@@ -64,7 +64,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          npm install  angular-cli-ghpages
+          # npm install -g angular-cli-ghpages
           npx angular-cli-ghpages --dir=dist/recipe-finder --verbose
         
         
