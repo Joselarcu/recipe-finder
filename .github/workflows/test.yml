@@ -61,7 +61,11 @@ jobs:
         run: npm run build -- --configuration production
 
       - name: Deploy to GitHub Pages
-        run: npx angular-cli-ghpages --dir=dist/recipe-finder
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          npm install  angular-cli-ghpages
+          npx angular-cli-ghpages --dir=dist/recipe-finder --verbose
         
         
         
