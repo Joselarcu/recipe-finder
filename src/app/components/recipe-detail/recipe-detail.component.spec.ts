@@ -70,22 +70,6 @@ describe('RecipeDetailComponent', () => {
     expect(component.recipe()).toEqual(mockRecipe);
   });
 
-  // it('should handle error state', () => {
-  //   const subject = new BehaviorSubject<Recipe | null>({} as any);
-
-  //   const recipeServiceStubNew = {
-  //     getRecipeById: () => subject,
-  //     setFavorite: jest.fn()
-  //   } as any;
-
-  //   subject.next(null);
-  //   fixture.detectChanges();
-
-  //   expect(component.loading()).toBe(false);
-  //   expect(component.error()).toBe('Error loading recipe details. Please try again.');
-  //   expect(component.recipe()).toBeNull();
-  // });
-
   it('should toggle favorite successfully', () => {
     const setFavoriteSpy = jest.spyOn(recipeServiceStub, 'setFavorite');
 
@@ -117,4 +101,5 @@ describe('RecipeDetailComponent', () => {
     expect(consoleSpy).toHaveBeenCalledWith('Error toggling favorite:', expect.any(Error));
     consoleSpy.mockRestore();
   });
+
 });
