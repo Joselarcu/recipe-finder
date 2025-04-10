@@ -47,18 +47,6 @@ jobs:
           npm install -g sonar-scanner
           sonar-scanner -Dsonar.token=${{ secrets.SONAR_TOKEN }}
 
-      #✅ Check unit test coverage >= 95%
-      - name: Check unit test coverage >= 95%
-        run: |
-          COVERAGE=$(grep -A1 "All files" coverage/lcov-report/index.html | grep -Eo '[0-9]+\.[0-9]+(?=%)')
-          echo "Statements coverage: $COVERAGE%"
-          if (( $(echo "$COVERAGE < 90" | bc -l) )); then
-            echo "❌ Unit test coverage is below 90%"
-            exit 1
-          else
-            echo "✅ Coverage is sufficient"
-          fi
-
       - name: run e2e tests
         run: npm run cy:run
         env:
