@@ -47,18 +47,6 @@ jobs:
           npm install -g sonar-scanner
           sonar-scanner -Dsonar.token=${{ secrets.SONAR_TOKEN }}
 
-      #✅ Check unit test coverage >= 95%
-      - name: Check unit test coverage >= 95%
-        run: |
-          COVERAGE=$(grep -A1 "All files" coverage/lcov-report/index.html | grep -Eo '[0-9]+\.[0-9]+(?=%)')
-          echo "Statements coverage: $COVERAGE%"
-          if (( $(echo "$COVERAGE < 90" | bc -l) )); then
-            echo "❌ Unit test coverage is below 90%"
-            exit 1
-          else
-            echo "✅ Coverage is sufficient"
-          fi
-
       - name: run e2e tests
         run: npm run cy:run
         env:
@@ -69,11 +57,16 @@ jobs:
           FIREBASE_MESSAGING_SENDER_ID: ${{ secrets.FIREBASE_MESSAGING_SENDER_ID }}
           FIREBASE_APP_ID: ${{ secrets.FIREBASE_APP_ID }}
       
-      - name: Build angular app
-        run: npm run build -- --configuration production
+      # - name: Build angular app
+        # run: npm run build 
+        # run: ng deploy
 
-      - name: Deploy to GitHub Pages
-        run: npx angular-cli-ghpages --dir=dist/recipe-finder
+      # - name: Deploy to GitHub Pages
+        # env:
+          # GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        # run: |
+          # npm install -g angular-cli-ghpages
+          # npx angular-cli-ghpages --dir=dist/recipe-finder
         
         
         

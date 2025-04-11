@@ -4,6 +4,7 @@ import { RecipeService } from '../../services/recipe.service';
 import { ActivatedRoute } from '@angular/router';
 import { of, throwError } from 'rxjs';
 import { Recipe } from '../../models/recipe.model';
+import { signal } from '@angular/core';
 
 describe('RecipeDetailComponent', () => {
   let component: RecipeDetailComponent;
@@ -70,22 +71,6 @@ describe('RecipeDetailComponent', () => {
     expect(component.recipe()).toEqual(mockRecipe);
   });
 
-  // it('should handle error state', () => {
-  //   const subject = new BehaviorSubject<Recipe | null>({} as any);
-
-  //   const recipeServiceStubNew = {
-  //     getRecipeById: () => subject,
-  //     setFavorite: jest.fn()
-  //   } as any;
-
-  //   subject.next(null);
-  //   fixture.detectChanges();
-
-  //   expect(component.loading()).toBe(false);
-  //   expect(component.error()).toBe('Error loading recipe details. Please try again.');
-  //   expect(component.recipe()).toBeNull();
-  // });
-
   it('should toggle favorite successfully', () => {
     const setFavoriteSpy = jest.spyOn(recipeServiceStub, 'setFavorite');
 
@@ -117,4 +102,35 @@ describe('RecipeDetailComponent', () => {
     expect(consoleSpy).toHaveBeenCalledWith('Error toggling favorite:', expect.any(Error));
     consoleSpy.mockRestore();
   });
+
+  it('should show error message when recipe is undefined', () => {
+    // Set recipe to undefined
+    component.recipe = signal(undefined);
+    
+    // Trigger change detection
+    fixture.detectChanges();
+
+    // Verify error message
+    expect(component.error()).toBe('Error loading recipe details. Please try again.');
+  });
+
+  it('should not show error message when recipe exists', () => {
+    // Set a mock recipe
+    component.recipe = signal({
+      id: '1',
+      title: 'Test Recipe',
+      readyTime: 30,
+      difficulty: 'easy',
+      imageUrl: 'test.jpg',
+      ingredients: [],
+      instructions: []
+    });
+    
+    // Trigger change detection
+    fixture.detectChanges();
+
+    // Verify no error message
+    expect(component.error()).toBe('');
+  });
+
 });
