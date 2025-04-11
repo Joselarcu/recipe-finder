@@ -58,8 +58,8 @@ jobs:
           FIREBASE_APP_ID: ${{ secrets.FIREBASE_APP_ID }}
       
       - name: Build angular app
-        # run: npm run build -- --configuration production
-        run: npm run deploy
+        run: npm run build 
+        # run: ng deploy
 
       - name: Deploy to GitHub Pages
         env:
