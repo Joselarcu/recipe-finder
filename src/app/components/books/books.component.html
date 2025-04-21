@@ -1,0 +1,13 @@
+
+<div class="container">
+    @if (books.isLoading()) {
+        <div>Loading books...</div>
+    } @else {
+        @for (book of books.value(); track $index) {
+            <div class="book">
+                {{book.title}} - {{book.author}}
+            </div>
+        
+        }
+    }
+</div>
