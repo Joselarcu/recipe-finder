@@ -17,5 +17,9 @@ export const routes: Routes = [
     path: 'new-recipe', 
     loadComponent: () => import('./components/add-recipe/add-recipe.component').then(m => m.AddRecipeComponent)
   },
+  { 
+    path: 'books', 
+    loadComponent: () => import('./components/books/books.component').then(m => m.BooksComponent)
+  },
   { path: '**', redirectTo: '' }
 ];
