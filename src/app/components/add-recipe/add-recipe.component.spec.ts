@@ -105,9 +105,6 @@ describe('AddRecipeComponent', () => {
     expect(loadingSignalSetSpy).toHaveBeenCalledWith(false);
     tick(1500);
     expect(navigateSpy).toHaveBeenCalledWith(['/recipes']);
-  }));
-
-  
-  
+  })); 
 
 });
