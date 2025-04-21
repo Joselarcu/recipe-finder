@@ -12,7 +12,7 @@ export class BooksComponent {
 
   apiUrl = 'https://www.freetestapi.com/api/v1/books';
 
-  //httpResource should be extracted to a service
+  //httpResource should be in a service
   books = httpResource< Book[]>(
     () => `${this.apiUrl}`, {defaultValue: []}
   )
