@@ -1,4 +1,8 @@
 
+<div>
+    <app-book-input [(bookTitle)]="bookTitle"></app-book-input>
+</div>
+Search: {{bookTitle()}}
 <div class="container">
     @if (books.isLoading()) {
         <div>Loading books...</div>
