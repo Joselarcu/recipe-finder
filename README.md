@@ -43,3 +43,51 @@ For end-to-end (e2e) testing, run:
 ```bash
 ng e2e
 ```
+
+#execute sonar locally on docker
+
+```bash
+docker run -d --name sonar-test -p 9000:9000 sonarqube
+```
+
+#docker
+
+create container
+```bash
+docker-compose build
+```
+
+run docker container
+```bash
+docker-compose up
+```
+
+stop docker container
+```bash
+docker-compose down
+```
+
+export docker container
+```bash
+docker save angular-docker -o angular-docker.tar
+```
+import docker container
+```bash
+docker load -i angular-docker.tar
+docker run -d -p 4200:80 angular-docker
+```
+
+see docker images
+```bash
+docker images
+```
+
+check if a container is running
+```bash
+docker ps
+```
+
+stop docmer container
+```bash
+docker stop idImage(check it on docker ps)
+```

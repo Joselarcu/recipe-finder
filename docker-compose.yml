@@ -1,0 +1,17 @@
+services: 
+  recipe-finder: 
+    # En vez de usar image, utilizaremos build para señalar que queremos construir el servicio en base 
+    # a todos los archivos que se encuentran en el directorio actual "." 
+    build:  . 
+
+    # El primer puerto será por el cual accederemos desde nuestra maquina local (se puede cambiar) 
+    # y el segundo es el que Angular utiliza por defecto y el cual expusimos en el Dokefile 
+    ports: 
+      -  "5000:4200" 
+    # Creamos un volumen espejo de nuestro directorio actual, osea de mi proyecto 
+    volumes: 
+      -  .:/usr/src 
+      # node_modules es a parte por que lo tenemos excluido en el .dockerignore 
+      -  /usr/src/node_modules
+    stdin_open: true  
+    tty: true

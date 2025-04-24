@@ -1,6 +1,0 @@
-projectKey=Joselarcu_recipe-finder
-serverUrl=http://localhost:9000
-serverVersion=25.4.0.105899
-dashboardUrl=http://localhost:9000/dashboard?id=Joselarcu_recipe-finder
-ceTaskId=ad3bc83a-7d62-4d69-8d6a-f0c999d8e826
-ceTaskUrl=http://localhost:9000/api/ce/task?id=ad3bc83a-7d62-4d69-8d6a-f0c999d8e826
