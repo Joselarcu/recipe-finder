@@ -47,5 +47,5 @@ Thumbs.db
 /cypress/screenshots
 
 # docker container
-recipe-finder.tar
+/recipe-finder.tar
 
